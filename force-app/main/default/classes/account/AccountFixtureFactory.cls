@@ -4,12 +4,19 @@ public class AccountFixtureFactory {
     public static Account createAccount (String name, String document, CNAE__c cnae) {
         return save( newAccount(name, document, cnae) );
     }
-
+ 
     public static Account newAccount (String name, String document, CNAE__c cnae) {
+
+        Account account = newAccount (name,document);
+        account.CNAE__c = cnae.Id;
+        return account;
+
+    }
+
+    public static Account newAccount (String name, String document) {
         return new Account (Name = name, 
                         CpfCnpj__c = document,
-                        BillingStreet =  'Rua Xyz',
-                        CNAE__c = cnae.Id );
+                        BillingStreet =  'Rua Xyz');
     }
 
     public static Account save (Account account) {
