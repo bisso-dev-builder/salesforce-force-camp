@@ -21,23 +21,26 @@ public with sharing class AccountTriggerHandler extends TriggerHandler {
         this.oldAccounts = oldAccounts;
 
         this.filter = new AccountFilter();
-        this.documentValidator = new AccountDocumentValidator();
+        this.documentValidator = new AccountDocumentValidator();    
     }
 
     override
     public void beforeInsert() {
-
+        AsyncCallLog.asyncLog('Async Log AccountTriggerHandler - beforeInsert');
         validateDocument();             
-
+        System.debug('Log AccountTriggerHandler - beforeInsert');
     }
 
     override
     public void beforeUpdate() {
-
         validateChangedDocument();
-        
     }
-    
+
+    override
+    public void afterInsert() {
+        enrichBillingAddress();
+    }
+
 
     private void validateDocument() {
         validateDocument (newAccounts);
@@ -55,5 +58,18 @@ public with sharing class AccountTriggerHandler extends TriggerHandler {
     private void validateDocument(List<Account> accounts) {
         this.documentValidator.validate(accounts);
     }
+
+
+    public void enrichBillingAddress () {
+
+        //Queueable
+        System.enqueueJob( new AsyncAccountAddressOutbound(newAccounts) );
+
+        //@future
+        // AsyncAccountAddressOutbound.enrichAddress ( 
+        //                Lists.pullField(newAccounts, 'Id') );
+
+    }
+
 
 }

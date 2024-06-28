@@ -31,7 +31,7 @@ public class GetAddressOutboundServiceTest {
         String payload = '{ "error" : "message" }';        
         
         Test.setMock( HttpCalloutMock.class, new HttpMock(payload, 403));
-        
+                
         Test.startTest();
         
         try {

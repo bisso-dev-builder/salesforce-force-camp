@@ -22,7 +22,7 @@ public virtual class AccountRepository {
     virtual
     public List<Account> findByIds (List<String> ids) {
         
-        return [SELECT Id, Name                
+        return [SELECT Id, Name, BillingPostalCode
                 FROM Account 
                 WHERE Id = :ids ];
     }

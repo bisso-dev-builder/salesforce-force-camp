@@ -13,6 +13,18 @@ public class AccountFixtureFactory {
 
     }
 
+    public static Account createAccount (String name, String document, String postalCode ) {
+        return save( newAccount(name, document,postalCode) );
+    }
+
+    public static Account newAccount (String name, String document, String postalCode ) {
+        
+        Account account = newAccount (name,document);
+        account.BillingPostalCode = postalCode;
+        return account;
+        
+    }
+    
     public static Account newAccount (String name, String document) {
         return new Account (Name = name, 
                         CpfCnpj__c = document,
