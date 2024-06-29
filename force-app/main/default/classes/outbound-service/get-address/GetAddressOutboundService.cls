@@ -9,6 +9,7 @@ public class GetAddressOutboundService {
 
         request.setEndpoint('https://viacep.com.br/ws/'+ zipCode  +'/json/');
         request.setMethod('GET');
+        request.setTimeout(120000);
         request.setHeader('Content-Type', 'application/json');
         
         Http http = new Http();
