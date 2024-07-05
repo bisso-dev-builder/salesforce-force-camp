@@ -1,15 +1,27 @@
-<template>
+<template>    
+
+    
+
+    <template if:true={showSecondLevel}>        
+        <c-second-level-component></c-second-level-component>
+    </template>
 
     <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+
+        <div class="slds-col slds-size_3-of-3 slds-p-around_xx-small">
+            
+            <lightning-button label="Show"
+                onclick={handleToggleComponent}
+                ></lightning-button>
+            
+
+        </div>
         
         <div class="slds-col slds-size_1-of-3 slds-p-around_xx-small">
             
             <lightning-input label="CEP" 
                     placeholder="CEP"
-                    lwc:ref="zipCode"
-                    data-field-name="zipCode"
                     value={zipCode}
-                    onblur={handleChange}
             ></lightning-input>
 
         </div>
@@ -18,10 +30,7 @@
             
             <lightning-input label="Street" 
                 placeholder="Street"
-                value={street}
-                data-field-name="street"
-                onblur={handleChange}
-            >
+                value={street}>
             </lightning-input>
 
         </div>
@@ -30,8 +39,8 @@
             
             <lightning-input label="Número" 
                 placeholder="Numero"
-                value={streetNumber}
-                onblur={handleChange}>            
+                value={streetNumber}>
+            
             </lightning-input>
 
         </div>
@@ -41,32 +50,10 @@
             <lightning-input label="Complemento"
                 placeholder="Complemento"
                 value={additionalInfo}
-                onblur={handleChange}
             ></lightning-input>
 
         </div>
 
-        <div class="slds-col slds-size_1-of-3 slds-p-around_xx-small">
-            
-            <lightning-combobox
-                label="Estado"
-                onblur={handleChange}                
-                ></lightning-combobox>
-
-        </div>
-
-        <div class="slds-col slds-size_2-of-3 slds-p-around_xx-small">
-            
-            <lightning-combobox
-                label="Cidade"                
-            ></lightning-combobox>
-
-        </div>
-
-
     </div>
-
-
-
 
 </template>
