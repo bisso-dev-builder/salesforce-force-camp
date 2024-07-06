@@ -4,13 +4,12 @@
         
         <div class="slds-col slds-size_1-of-3 slds-p-around_xx-small">
             
-            <lightning-input label="CEP" 
-                    placeholder="CEP"
-                    lwc:ref="zipCode"
-                    data-field-name="zipCode"
-                    value={zipCode}
-                    onblur={handleChange}
-            ></lightning-input>
+            <c-zip-code 
+                lwc:ref="zipCode"
+                zip-code={zipCode}
+                onselectedaddress={handleChangedAddress}>
+                
+            </c-zip-code>
 
         </div>
 
@@ -48,23 +47,52 @@
 
         <div class="slds-col slds-size_1-of-3 slds-p-around_xx-small">
             
-            <lightning-combobox
-                label="Estado"
-                onblur={handleChange}                
-                ></lightning-combobox>
+            <c-states></c-states>
 
         </div>
 
         <div class="slds-col slds-size_2-of-3 slds-p-around_xx-small">
             
             <lightning-combobox
-                label="Cidade"                
+                label="Cidade"
+                data-field-name="city"
+                onblur={handleChange}
+                options={cities}            
+                value={city}             
             ></lightning-combobox>
+
+        </div>
+
+        <div class="slds-col slds-size_3-of-3 slds-p-around_xx-small slds-text-align_right">
+            
+            <lightning-button label="Adicionar"
+                onclick={handleAdd}
+            ></lightning-button>
 
         </div>
 
 
     </div>
+
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cep</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Cidade</th>
+            </tr>
+        </thead>
+        <template for:each={addresses} for:item="item">
+        <tr key={item.sequence} >
+            <td>{item.sequence}</td>
+            <td>{item.zipCode}</td>
+            <td>{item.street}</td>
+            <td>{item.city}</td>
+        </tr>
+        </template>
+
+    </table>
 
 
 
