@@ -1,0 +1,37 @@
+<template>
+
+
+  
+        <lightning-modal-header label="Novo Endereço">       
+        </lightning-modal-header>
+
+        <lightning-modal-body>
+
+            <c-address 
+                zip-code={zipCode}
+                onaddressfound={handleAddressFound}>
+            </c-address>
+            
+        </lightning-modal-body>
+        <lightning-modal-footer>
+
+            <lightning-button
+                class="slds-button"
+                variant="neutral"
+                label="Cancel"
+            ></lightning-button>
+
+            <lightning-button
+                class="slds-button slds-m-left_x-small"
+                variant="brand"
+                label="Save"
+                onclick={handleSaveAddress}
+            ></lightning-button>
+
+        </lightning-modal-footer>
+
+        <template lwc:if={loading}>
+            <lightning-spinner alternative-text="Loading" size="x-small"></lightning-spinner>
+        </template>
+
+</template>

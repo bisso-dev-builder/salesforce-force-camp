@@ -4,6 +4,8 @@ import findAddressByZipCode from '@salesforce/apex/AddressController.findAddress
 
 export default class ZipCode extends LightningElement {
 
+    searchZipCode;
+
     @api
     get zipCode () {
         return this._zipCode;
@@ -12,6 +14,7 @@ export default class ZipCode extends LightningElement {
     set zipCode (value) {
         if (!value) return;
         this._zipCode = value;
+        this.searchZipCode = value;
     }    
     
     handleChange (event) {
@@ -20,7 +23,7 @@ export default class ZipCode extends LightningElement {
         
         this[event.target.dataset.fieldName] = event.target.value;
 
-        findAddressByZipCode( {zipCode: this.zipCode} ).then (result => {
+        findAddressByZipCode( {zipCode: this.searchZipCode} ).then (result => {
 
             let _address = result;
 

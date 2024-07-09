@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { api, LightningElement, track } from 'lwc';
 
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
@@ -14,8 +14,20 @@ const CITIES = [ {label : "Rio de Janeiro", value : "Rio de Janeiro"},
 
 export default class Address extends LightningElement {
 
+    @api 
+    get zipCode () {
+        return this._zipCode;
+    } 
 
-    zipCode;
+    set zipCode (value) {
+        if (!value) return;
+        this._zipCode = value;
+        
+        if (this.refs.zipCodeComponent) {
+            this.refs.zipCodeComponent.zipCode = this._zipCode;
+        }
+    } 
+
     street;
     streetNumber;
     additionalInfo;
@@ -28,8 +40,7 @@ export default class Address extends LightningElement {
 
     connectedCallback () {
         this.cities = CITIES;
-        this.states = STATES;
-        this.zipCode = '12220000';
+        this.states = STATES;        
     }
 
     handleChange (event) {
@@ -76,6 +87,22 @@ export default class Address extends LightningElement {
         this.street = event.detail.street;
         this.state = event.detail.state;
         this.city = event.detail.city;
+
+        this.publishAddressFound ();
+
+    } 
+
+
+    publishAddressFound () {
+
+        const address = {
+            zipCode : this.zipCode,
+            street : this.street,
+            state :this.state,
+            city :this.city
+        }
+
+        this.dispatchEvent ( new CustomEvent ('addressfound', {detail:address}) );
 
     } 
 

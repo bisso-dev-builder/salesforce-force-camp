@@ -24,4 +24,10 @@ public class LeadRepository {
     }
 
 
+    public Lead findById (String id) {
+        return [ SELECT Id, Street, City, State, PostalCode 
+                 FROM Lead
+                 WHERE Id =:id ];
+    }
+
 }
