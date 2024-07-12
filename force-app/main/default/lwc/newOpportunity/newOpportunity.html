@@ -1,0 +1,119 @@
+<template>
+
+    <lightning-record-edit-form object-api-name="Opportunity"
+        record-id={recordId}
+        onsuccess={handleSuccess}>
+
+    <lightning-modal-header label="Novo Endereço">       
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+
+
+            <lightning-messages></lightning-messages>
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="Name"
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="StageName"
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="AccountId"
+                        value={pageRef.state.recordId}
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                </div>  
+
+                   
+                    <c-lookup label="Endereço Cobrança"
+                        data-field-name="BillingAddress__c"
+                        onsearch={handleSearchAddress} 
+                        onselectionchange={handleSelectedAddress}
+                        required
+                    ></c-lookup>
+
+                    <lightning-input-field 
+                        field-name="BillingAddress__c"
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="ShippingAddress__c"
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="Pricebook2Id"
+                    ></lightning-input-field>
+
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-2 slds-p-around_xx-small">
+                    
+                    <lightning-input-field 
+                        field-name="CloseDate"
+                    ></lightning-input-field>
+
+                </div>
+
+
+
+            </div>
+
+
+
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+
+        <lightning-button
+            class="slds-button"
+            variant="neutral"
+            label="Cancelar"
+        ></lightning-button>
+
+        <lightning-button
+            type="submit"
+            name="submit"
+            class="slds-button slds-m-left_x-small"
+            variant="brand"
+            label="Salvar"
+        ></lightning-button>
+
+
+    </lightning-modal-footer>
+
+    </lightning-record-edit-form>    
+
+</template>
