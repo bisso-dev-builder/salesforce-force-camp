@@ -6,7 +6,13 @@ import { NavigationMixin } from 'lightning/navigation';
 
 import { CurrentPageReference } from 'lightning/navigation';
 
+import { getPicklistValues } from "lightning/uiObjectInfoApi";
+
 import search from '@salesforce/apex/SearchAddressController.search';
+
+import OPPORTUNITY_STAGE from '@salesforce/schema/Opportunity.StageName'
+
+import OPPORTUNITY from '@salesforce/schema/Opportunity'
 
 const _addressDisplayInfo = {
     primaryField: 'Address__c.Address__Street__c',
@@ -25,8 +31,12 @@ export default class NewOpportunity extends NavigationMixin(LightningElement) {
         if (!value)
         this._recordId = value;
     }
-
     
+    searchTerm;    
+
+    @wire(getPicklistValues, { recordTypeId: "012000000000000AAA", fieldApiName: OPPORTUNITY_STAGE })
+    opportunityStageNames;
+
     @wire(CurrentPageReference)
     pageRef;
 
@@ -68,12 +78,37 @@ export default class NewOpportunity extends NavigationMixin(LightningElement) {
 
         let _lookup = event.target;
 
+        this.searchTerm =  event.detail.searchTerm;
+
         const _results = await search ( { term: event.detail.searchTerm
-                                , recordTypeDeveloperName : 'Billing' } );
+                                  , recordTypeDeveloperName : 'Billing' } );
 
+        // search( { term: event.detail.searchTerm, recordTypeDeveloperName : 'Billing' }  )
+        //     .then (result => {
+
+        //     }).catch ((e) => {
+                
+        //     }).finally (() => {
+
+        //     })
+        
         _lookup.setSearchResults(_results);
-
     }
+
+    // @wire( search, { term: '$searchTerm', recordTypeDeveloperName : 'Billing' }  )
+    // search ({error, data}) {
+
+    //     if (error) {    
+    //         console.log (error);
+    //         return;
+    //     }
+
+    //     if (data) {
+    //         this.refs.billingLookup.setSearchResults(data);
+    //     }
+
+    // }   
+
 
     handleSelectedAddress (event) {
 
@@ -87,5 +122,6 @@ export default class NewOpportunity extends NavigationMixin(LightningElement) {
         console.log ( selection );
 
     }
+
 
 }

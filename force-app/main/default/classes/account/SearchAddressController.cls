@@ -6,7 +6,7 @@ public class SearchAddressController {
         repository = new AddressRepository();
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<LookupSearchResult> search ( String term, String recordTypeDeveloperName ) {
         term = '%' + term + '%';
 
