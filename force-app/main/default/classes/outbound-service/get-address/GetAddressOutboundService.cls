@@ -1,8 +1,9 @@
-public class GetAddressOutboundService {
+public virtual class GetAddressOutboundService {
 
     public GetAddressOutboundService() {
     }
 
+    virtual
     public GetAddressResponse getAddress (String zipCode) {
 
         HttpRequest request = new HttpRequest();

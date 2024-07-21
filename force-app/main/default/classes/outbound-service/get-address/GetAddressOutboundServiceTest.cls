@@ -8,7 +8,7 @@ public class GetAddressOutboundServiceTest {
     public static void shouldFindAddressByZipCode () {
 
         String payload = '{ "cep": "12220-400", "logradouro": "Avenida José de Moura Candelaria", "complemento": "", "unidade": "", "bairro": "Vila Industrial", "localidade": "São José dos Campos", "uf": "SP", "ibge": "3549904", "gia": "6452", "ddd": "12", "siafi": "7099" }';        
-        
+                
         Test.setMock( HttpCalloutMock.class, new HttpMock(payload));
         
         Test.startTest();

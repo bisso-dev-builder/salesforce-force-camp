@@ -1,5 +1,7 @@
 trigger Leads on Lead (before insert, before update, after insert, after update) {
 
+    new LeadTriggerHandler().run();
+
     // System.debug( ' Contexto de Insert : BEFORE ' +  Trigger.isBefore + ' ' + Trigger.isInsert );    
     // System.debug( ' Contexto de Insert : AFTER  ' +  Trigger.isAfter  + ' ' + Trigger.isInsert );
 
@@ -10,28 +12,28 @@ trigger Leads on Lead (before insert, before update, after insert, after update)
     // System.debug('Valores Novos ' + Trigger.new );
     // System.debug('Valores Anteriores ' + Trigger.oldMap );
 
-    static Map<String, RecordTypeInfo> recordTypes = Lead.getSObjectType()
-        .getDescribe()
-        .getRecordTypeInfosByDeveloperName();
+    // static Map<String, RecordTypeInfo> recordTypes = Lead.getSObjectType()
+    //     .getDescribe()
+    //     .getRecordTypeInfosByDeveloperName();
 
-    List<Lead> newLeads = Trigger.new;
+    // List<Lead> newLeads = Trigger.new;
 
-    Map<Id,Lead> oldLeads = Trigger.oldMap;
+    // Map<Id,Lead> oldLeads = Trigger.oldMap;
 
-    switch on Trigger.operationType {
+    // switch on Trigger.operationType {
         
-        when BEFORE_INSERT, BEFORE_UPDATE  {
+    //     when BEFORE_INSERT, BEFORE_UPDATE  {
 
-            for ( Lead lead : newLeads ) {
+    //         for ( Lead lead : newLeads ) {
 
-                if ( String.isNotEmpty(lead.RecordTypeDeveloperNameMobile__c)) {
+    //             if ( String.isNotEmpty(lead.RecordTypeDeveloperNameMobile__c)) {
 
-                    lead.RecordTypeId = recordTypes.get(lead.RecordTypeDeveloperNameMobile__c).getRecordTypeId();
+    //                 lead.RecordTypeId = recordTypes.get(lead.RecordTypeDeveloperNameMobile__c).getRecordTypeId();
 
-                }
+    //             }
 
-            }
-        }
-    }   
+    //         }
+    //     }
+    // }   
 
 }

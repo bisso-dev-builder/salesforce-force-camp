@@ -1,8 +1,15 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public class LeadRepository {
+public virtual class LeadRepository {
 
+
+    public List<Lead> save (List<Lead> leads) {
+
+        upsert leads;
+        return leads;
+
+    }
 
     public Lead save (Lead lead) {
 
@@ -11,6 +18,7 @@ public class LeadRepository {
 
     }
 
+    virtual
     public Lead findByEmail (String email) {
 
         List<Lead> leads = [ SELECT Id, LastName
@@ -23,7 +31,7 @@ public class LeadRepository {
 
     }
 
-
+    virtual
     public Lead findById (String id) {
         return [ SELECT Id, Street, City, State, PostalCode 
                  FROM Lead

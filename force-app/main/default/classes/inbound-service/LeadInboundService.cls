@@ -4,7 +4,9 @@
 @RestResource(urlMapping='/api/leads')
 global class LeadInboundService {
     
+    @TestVisible
     static LeadRepository repository;
+
     static LogRepository logRepository;
 
     static {
